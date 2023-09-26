@@ -8,6 +8,15 @@ const actorsController = {
             })
             .catch((err) => console.log(err));
     },
+    detail: (req, res) => {
+        const { id } = req.params;
+
+        db.Actor.findByPk(id)
+            .then((actor) => {
+                return res.render("actorsDetail", { actor });
+            })
+            .catch((err) => console.log(err));
+    },
 };
 
 module.exports = actorsController;
