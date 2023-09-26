@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
             release_date: { type: DataTypes.DATE, allowNull: false },
             length: { type: DataTypes.DATE },
             genre_id: { type: DataTypes.DATE },
-            createdAt: {
+            created_at: {
                 type: DataTypes.DATE,
             },
-            updatedAt: {
+            updated_at: {
                 type: DataTypes.DATE,
             },
         },
-        { tableName: "movies" }
+        { tableName: "movies", timestamps: false }
     );
 
     return Movie;

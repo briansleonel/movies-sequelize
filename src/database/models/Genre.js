@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
             name: { type: DataTypes.STRING(100), allowNull: false },
             ranking: { type: DataTypes.INTEGER, allowNull: false },
             active: { type: DataTypes.TINYINT(1), allowNull: false },
-            createdAt: {
+            created_at: {
                 type: DataTypes.DATE,
             },
-            updatedAt: {
+            updated_at: {
                 type: DataTypes.DATE,
             },
         },
-        { tableName: "genres" }
+        { tableName: "genres", timestamps: false }
     );
 
     return Genre;
