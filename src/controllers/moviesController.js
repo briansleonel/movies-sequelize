@@ -17,6 +17,13 @@ const moviesController = {
             })
             .catch((err) => console.log(err));
     },
+    new: (req, res) => {
+        db.Movie.findAll({ order: [["release_date", "DESC"]] })
+            .then((movies) => {
+                return res.render("newestMovies", { movies });
+            })
+            .catch((err) => console.log(err));
+    },
 };
 
 module.exports = moviesController;
