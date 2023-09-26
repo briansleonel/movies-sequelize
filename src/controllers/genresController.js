@@ -8,6 +8,15 @@ const genresController = {
             })
             .catch((err) => console.log(err));
     },
+    detail: (req, res) => {
+        const { id } = req.params;
+
+        db.Genre.findByPk(id)
+            .then((genre) => {
+                return res.render("genresDetail", { genre });
+            })
+            .catch((err) => console.log(err));
+    },
 };
 
 module.exports = genresController;
