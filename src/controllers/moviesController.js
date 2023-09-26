@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const db = require("../database/models");
 
 const moviesController = {
@@ -21,6 +22,20 @@ const moviesController = {
         db.Movie.findAll({ order: [["release_date", "DESC"]] })
             .then((movies) => {
                 return res.render("newestMovies", { movies });
+            })
+            .catch((err) => console.log(err));
+    },
+    recomended: (req, res) => {
+        db.Movie.findAll({
+            /*
+            where: {
+                rating: { [Op.gte]: 7 },
+            },*/
+            order: [["rating", "DESC"]],
+            limit: 5,
+        })
+            .then((movies) => {
+                return res.render("recommendedMovies", { movies });
             })
             .catch((err) => console.log(err));
     },
