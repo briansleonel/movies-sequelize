@@ -39,6 +39,29 @@ const moviesController = {
             })
             .catch((err) => console.log(err));
     },
+    //Aqui debemos modificar y completar lo necesario para trabajar con el CRUD
+    add: function (req, res) {
+        res.render("moviesAdd");
+    },
+    create: function (req, res) {
+        const { title, rating, awards, release_date, length } = req.body;
+
+        db.Movie.create({ title, rating, awards, release_date, length });
+
+        res.redirect("/movies");
+    },
+    edit: function (req, res) {
+        // TODO
+    },
+    update: function (req, res) {
+        // TODO
+    },
+    delete: function (req, res) {
+        // TODO
+    },
+    destroy: function (req, res) {
+        // TODO
+    },
 };
 
 module.exports = moviesController;
