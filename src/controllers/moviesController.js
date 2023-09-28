@@ -51,10 +51,38 @@ const moviesController = {
         res.redirect("/movies");
     },
     edit: function (req, res) {
-        // TODO
+        const { id } = req.params;
+
+        db.Movie.findByPk(id)
+            .then((movie) => {
+                return res.render("moviesEdit", { movie });
+            })
+            .catch((err) => console.log(err));
     },
-    update: function (req, res) {
-        // TODO
+    update: async function (req, res) {
+        const { title, rating, awards, release_date, length } = req.body;
+        const { id } = req.params;
+
+        const movieFound = await db.Movie.findByPk(id);
+
+        db.Movie.update(
+            {
+                title,
+                rating,
+                awards,
+                release_date: release_date
+                    ? release_date
+                    : movieFound.release_date,
+                length,
+            },
+            {
+                where: {
+                    id,
+                },
+            }
+        );
+
+        res.redirect("/movies");
     },
     delete: function (req, res) {
         // TODO
