@@ -46,9 +46,11 @@ const moviesController = {
     create: function (req, res) {
         const { title, rating, awards, release_date, length } = req.body;
 
-        db.Movie.create({ title, rating, awards, release_date, length });
-
-        res.redirect("/movies");
+        db.Movie.create({ title, rating, awards, release_date, length }).then(
+            (state) => {
+                return res.redirect("/movies");
+            }
+        );
     },
     edit: function (req, res) {
         const { id } = req.params;
@@ -80,15 +82,25 @@ const moviesController = {
                     id,
                 },
             }
-        );
-
-        res.redirect("/movies");
+        ).then((state) => {
+            return res.redirect("/movies");
+        });
     },
     delete: function (req, res) {
-        // TODO
+        const { id } = req.params;
+
+        db.Movie.findByPk(id)
+            .then((movie) => {
+                return res.render("moviesDelete", { movie });
+            })
+            .catch((err) => console.log(err));
     },
     destroy: function (req, res) {
-        // TODO
+        const { id } = req.params;
+
+        db.Movie.destroy({ where: { id } }).then((state) => {
+            return res.redirect("/movies");
+        });
     },
 };
 
