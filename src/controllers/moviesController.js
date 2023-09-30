@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
 const db = require("../database/models");
+const moment = require("moment");
 
 const moviesController = {
     list: (req, res) => {
@@ -57,24 +57,20 @@ const moviesController = {
 
         db.Movie.findByPk(id)
             .then((movie) => {
-                return res.render("moviesEdit", { movie });
+                return res.render("moviesEdit", { movie, moment });
             })
             .catch((err) => console.log(err));
     },
-    update: async function (req, res) {
+    update: function (req, res) {
         const { title, rating, awards, release_date, length } = req.body;
         const { id } = req.params;
-
-        const movieFound = await db.Movie.findByPk(id);
 
         db.Movie.update(
             {
                 title,
                 rating,
                 awards,
-                release_date: release_date
-                    ? release_date
-                    : movieFound.release_date,
+                release_date,
                 length,
             },
             {

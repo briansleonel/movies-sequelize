@@ -22,9 +22,9 @@
             <label for="awards">Awards </label>
             <p><input type="number" name="awards" id="awards" value="<%= movie.awards %>" required></p>
             <label for="release_date">Release date </label>
-            <p><input type="date" name="release_date" id="release_date" value="<%= movie.release_date %>" ></p>
+            <p><input type="date" name="release_date" id="release_date" value="<%= moment(movie.release_date).format("YYYY-MM-DD") %>" ></p>
             <label for="length">Length </label>
-            <p><input type="number" name="length" id="" value="<%= movie.length %>" required></p>
+            <p><input type="number" name="length" id="length" value="<%= movie.length %>" required></p>
             <br>
             <p> <button class="botonAgregar" type="submit">Actualizar</button>
         
